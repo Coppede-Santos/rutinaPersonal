@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MacaPersonal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a more personal touch */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5ED; /* Light beige background */
+        }
+        .exercise-card {
+            background-color: #FFFFFF; /* White card background */
+            border-radius: 12px; /* Rounded corners */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Soft shadow */
+            transition: transform 0.2s ease-in-out;
+        }
+        .exercise-card:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+        }
+        .complete-button {
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        .complete-button:hover:not(:disabled) {
+            background-color: #45a049; /* Darker green on hover */
+            transform: translateY(-2px);
+        }
+        .complete-button:disabled {
+            background-color: #a0a0a0; /* Gray when disabled */
+            cursor: not-allowed;
+        }
+        .completed-text {
+            color: #28a745; /* Green text for completed */
+            font-weight: 600;
+        }
+        .weight-input {
+            border: 1px solid #D1D5DB; /* Light gray border */
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 150px; /* Limit input width */
+            background-color: #F9FAFB; /* Off-white input background */
+            color: #374151; /* Dark gray text */
+        }
+        .weight-input:focus {
+            outline: none;
+            border-color: #4CAF50; /* Green border on focus */
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* Soft green shadow on focus */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen p-4 sm:p-6 lg:p-8">
+    <header class="w-full max-w-4xl text-center py-8">
+        <h1 class="text-5xl sm:text-6xl font-extrabold text-green-800 tracking-tight mb-4">MacaPersonal</h1>
+        <p class="text-xl sm:text-2xl text-gray-700">Tu rutina de entrenamiento personalizada</p>
+    </header>
+
+    <main class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <!-- Exercise 1 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 1: Entrada en calor con movilidad articular</h2>
+                <p class="text-gray-600 mb-4">1 Set - 10 c/u Reps</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+
+        <!-- Exercise 2 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 2: Dorsales: dominadas</h2>
+                <p class="text-gray-600 mb-4">5 Sets - máx. Reps</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+
+        <!-- Exercise 3 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 3: Dorsales: Remo Pendlay</h2>
+                <p class="text-gray-600 mb-4">4 Sets - 8 Reps</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+
+        <!-- Exercise 4 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 4: Dorsales: jalón al pecho agarre cerrado</h2>
+                <p class="text-gray-600 mb-4">Detalles no especificados, ¡completa tus sets!</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+
+        <!-- Exercise 5 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 5: Hombros: vuelos posteriores en peck deck</h2>
+                <p class="text-gray-600 mb-4">3 Sets – 12 Reps</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+
+        <!-- Exercise 6 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 6: Bíceps: Curl con Mancuernas Banco Inclinado</h2>
+                <p class="text-gray-600 mb-4">4 Sets - 6-7 Reps</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+
+        <!-- Exercise 7 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 7: Bíceps: Alternado en Polea</h2>
+                <p class="text-gray-600 mb-4">3 Sets – 12 Reps</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+
+        <!-- Exercise 8 -->
+        <div class="exercise-card p-6 flex flex-col justify-between">
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-2">Ejercicio 8: Bíceps: Banco Scott Concentrado</h2>
+                <p class="text-gray-600 mb-4">3 Sets – 10 Reps</p>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center justify-end gap-3 mt-4">
+                <input type="number" placeholder="Peso (kg)" class="weight-input" min="0" step="0.5">
+                <button class="complete-button" onclick="markAsCompleted(this)">Marcar como realizado</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        /**
+         * Marks an exercise button as completed, changing its text and styling.
+         * @param {HTMLButtonElement} button - The button element that was clicked.
+         */
+        function markAsCompleted(button) {
+            // Disable the button to prevent multiple clicks
+            button.disabled = true;
+            // Change button text to indicate completion
+            button.textContent = '¡Realizado!';
+            // Remove the original styling class and add a new one for completed state
+            button.classList.remove('complete-button');
+            button.classList.add('completed-text');
+
+            // Optionally, you could store this state and the weight in localStorage for persistence
+            // Find the parent div of the button
+            const exerciseCard = button.closest('.exercise-card');
+            if (exerciseCard) {
+                const exerciseName = exerciseCard.querySelector('h2').textContent;
+                const weightInput = exerciseCard.querySelector('.weight-input');
+                const weight = weightInput ? weightInput.value : '';
+
+                // Example of storing in localStorage (uncomment to enable persistence)
+                // localStorage.setItem(`${exerciseName}_completed`, 'true');
+                // if (weight) {
+                //     localStorage.setItem(`${exerciseName}_weight`, weight);
+                // }
+            }
+        }
+
+        // Optional: Load completion status and weight from localStorage on page load
+        // window.onload = function() {
+        //     const exerciseCards = document.querySelectorAll('.exercise-card');
+        //     exerciseCards.forEach(card => {
+        //         const exerciseName = card.querySelector('h2').textContent;
+        //         const completeButton = card.querySelector('.complete-button');
+        //         const weightInput = card.querySelector('.weight-input');
+
+        //         if (localStorage.getItem(`${exerciseName}_completed`) === 'true') {
+        //             markAsCompleted(completeButton);
+        //         }
+        //         if (weightInput && localStorage.getItem(`${exerciseName}_weight`)) {
+        //             weightInput.value = localStorage.getItem(`${exerciseName}_weight`);
+        //         }
+        //     });
+        // };
+    </script>
+</body>
+</html>
