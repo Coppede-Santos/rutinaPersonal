@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Entrenamiento - Luciana Lanzone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles to enhance Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background */
+            color: #334155; /* Darker text for readability */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header {
+            background-color: #1e3a8a; /* Darker blue for header */
+            color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem; /* More rounded corners */
+            text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Stronger shadow */
+        }
+        .section-title {
+            font-size: 2.25rem; /* Larger title */
+            font-weight: 800; /* Extra bold */
+            color: #1e40af; /* Deep blue for section titles */
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #f59e0b; /* Orange accent underline */
+            margin: 0.5rem auto 0;
+            border-radius: 9999px;
+        }
+        .card {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        .table-container {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 1rem;
+            text-align: left;
+        }
+        th {
+            background-color: #dbeafe; /* Light blue header for tables */
+            font-weight: 700;
+            color: #1e3a8a; /* Dark blue text for headers */
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+        td {
+            background-color: #ffffff;
+        }
+        tr:nth-child(even) td {
+            background-color: #f8fafc; /* Zebra striping for tables */
+        }
+        .day-section {
+            background-color: #bfdbfe; /* Medium blue for day headers */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .day-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        .block-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #334155;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 0.5rem;
+        }
+        .variant-section {
+            background-color: #fffbeb; /* Light yellow background */
+            border-left: 6px solid #f59e0b; /* Orange border */
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .variant-title {
+            font-weight: 700;
+            color: #d97706; /* Darker orange text */
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Details/Summary for collapsible sections */
+        details {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease-in-out;
+        }
+        details[open] {
+            background-color: #e0f2fe; /* Lighter blue when open */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        summary {
+            font-size: 1.75rem; /* Larger summary title */
+            font-weight: 700;
+            color: #1e40af; /* Deep blue */
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            outline: none;
+            list-style: none; /* Remove default marker */
+            position: relative;
+            transition: background-color 0.3s ease-in-out;
+        }
+        summary:hover {
+            background-color: #eff6ff; /* Lighter blue on hover */
+        }
+        summary::-webkit-details-marker {
+            display: none; /* Hide default marker for webkit browsers */
+        }
+        summary::before {
+            content: '+';
+            font-size: 2rem;
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s ease-in-out;
+            color: #1e40af;
+        }
+        details[open] > summary::before {
+            content: '-';
+            transform: translateY(-50%) rotate(0deg); /* No rotation needed for '-' */
+        }
+        details[open] > summary {
+            border-bottom: 1px solid #a7d9f7; /* Separator when open */
+        }
+        .details-content {
+            padding: 1rem 2rem 2rem;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container">
+        <header class="header">
+            <h1 class="text-4xl font-extrabold tracking-tight">PLAN DE ENTRENAMIENTO</h1>
+            <h2 class="text-2xl font-semibold mt-3">LUCIANA LANZONE – CICLO 2</h2>
+        </header>
+
+        <section class="card">
+            <h3 class="section-title">OBJETIVOS DEL CICLO</h3>
+            <p class="text-gray-700 leading-relaxed text-lg">
+                El ciclo se compone de 4 semanas de entrenamiento, en los cuales buscamos mejorar la funcionalidad general del cuerpo y optimizar la eficacia del movimiento, por lo que trabajaremos sobre:
+            </p>
+            <ul class="list-disc list-inside mt-6 text-gray-700 text-lg space-y-2">
+                <li>
+                    <strong>Estabilidad central:</strong> buscando fortalecer la musculatura profunda del core con el fin de favorecer la correcta transferencia de fuerza entre el tren superior e inferior, mejorando el control postural y reduciendo el riesgo de lesiones.
+                </li>
+                <li>
+                    <strong>Fuerza del tren inferior:</strong> desarrollamos un programa progresivo de fuerza enfocado en los principales grupos musculares del tren inferior, priorizando la ejecución adecuada.
+                </li>
+                <li>
+                    <strong>Resistencia cardiovascular:</strong> en la búsqueda de aumentar la resistencia y salud cardiovascular, se incorporarán estímulos aeróbicos con el objetivo de mejorar la capacidad, la eficiencia en el consumo de oxígeno, y contribuir a la salud metabólica general. El trabajo se orientará a lograr una mayor tolerancia al esfuerzo físico sostenido, favoreciendo la recuperación y el rendimiento en otras áreas de entrenamiento.
+                </li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h3 class="section-title">DESCRIPCIÓN DE CONTENIDO</h3>
+            <p class="text-gray-700 leading-relaxed text-lg">
+                En este documento encontrarás los días de entrenamiento representados en tablas, divididos por bloques de trabajo. Además, podrás visualizar agrupada la semana 1 y 2, y las semanas 3 y 4 que representan la progresión del entrenamiento. Por otro lado, al final de cada día, podrás encontrar una sección “variable a…” que corresponden a alternativas del entrenamiento. Estas sirven para esos días en los que disponemos de menos tiempo.
+            </p>
+        </section>
+
+        <!-- DÍA 1: MUSCULACIÓN -->
+        <details>
+            <summary>DÍA 1: MUSCULACIÓN</summary>
+            <div class="details-content">
+                <section class="card !shadow-none !mb-0 !p-0">
+                    <h4 class="block-title">PRIMER BLOQUE – MOVILIDAD ARTICULAR Y ACTIVACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>MOVILIDAD: cadera, rodilla, tobillo, hombro y espalda</td><td>1</td><td>10 c/u</td><td>1</td><td>10 c/u</td></tr>
+                                <tr><td>Extensión dorsal en el piso: variante 1</td><td>2</td><td>10</td><td>2</td><td>10</td></tr>
+                                <tr><td>Extensión dorsal en el piso: variante 3</td><td>2</td><td>16</td><td>2</td><td>16</td></tr>
+                                <tr><td>Puente ventral a un pie</td><td>2</td><td>10”c/l</td><td>2</td><td>10”c/l</td></tr>
+                                <tr><td>Press pallof</td><td>2</td><td>15”c/l</td><td>2</td><td>15”c/l</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">SEGUNDO BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Sentadilla búlgara</td><td>3</td><td>8 c/l</td><td>4</td><td>6 c/l</td></tr>
+                                <tr><td>Press Arnold</td><td>3</td><td>12</td><td>4</td><td>8</td></tr>
+                                <tr><td>Puente glúteo + rodilla al pecho</td><td>3</td><td>10 c/l</td><td>4</td><td>15c/l</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">TERCER BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Camilla femoral</td><td>3</td><td>15</td><td>3</td><td>10</td></tr>
+                                <tr><td>Face pull con soga en polea</td><td>3</td><td>5x4”</td><td>3</td><td>6x6”</td></tr>
+                                <tr><td>Crunch carpa</td><td>3</td><td>12</td><td>3</td><td>15</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">CUARTO BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Estocada en step</td><td>3</td><td>8 c/l</td><td>4</td><td>12c/l</td></tr>
+                                <tr><td>Fondo en cajón</td><td>3</td><td>Máx.</td><td>4</td><td>8 *</td></tr>
+                                <tr><td>Puente dinámico con rotación</td><td>3</td><td>18</td><td>4</td><td>18 *</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">QUINTO BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Abductores en multicadera (máquina)</td><td>3</td><td>6x6”</td><td>3</td><td>6X6”</td></tr>
+                                <tr><td>Curl con mancuernas</td><td>3</td><td>10</td><td>3</td><td>12</td></tr>
+                                <tr><td>Sentadilla sumo</td><td>3</td><td>8</td><td>3</td><td>12</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-gray-700 mt-4 text-lg"><strong>PAUSA ENTRE BLOQUE:</strong> 2min. máximo</p>
+                    <p class="text-gray-700 text-lg">*agregar carga / progresión</p>
+
+                    <div class="variant-section">
+                        <h4 class="variant-title">Variante al día de musculación</h4>
+                        <p class="text-gray-700 text-lg">En caso de llegar tarde o disponer menos de una hora:</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-700 text-lg">
+                            <li>Opción 1: incluye del primer al cuarto bloque (tiempo estimado: 45min.)</li>
+                            <li>Opción 2: incluye del primer al tercer bloque (tiempo estimado: 35min.)</li>
+                        </ul>
+                        <h5 class="block-title !text-lg">PRIMER BLOQUE - MOVILIDAD ARTICULAR Y ACTIVACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>MOVILIDAD: cadera, rodilla, tobillo, hombro y espalda</td><td>1</td><td>10 c/u</td></tr>
+                                    <tr><td>Extensión dorsal en el piso: variante 1</td><td>2</td><td>10</td></tr>
+                                    <tr><td>Extensión dorsal en el piso: variante 3</td><td>2</td><td>16</td></tr>
+                                    <tr><td>Puente ventral a un pie</td><td>2</td><td>10”c/l</td></tr>
+                                    <tr><td>Press pallof</td><td>2</td><td>15”c/l</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">SEGUNDO BLOQUE – MUSCULACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Sentadilla búlgara</td><td>3</td><td>8 c/l</td></tr>
+                                    <tr><td>Press Arnold</td><td>3</td><td>12</td></tr>
+                                    <tr><td>Puente glúteo + rodilla al pecho</td><td>3</td><td>10 c/l</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">TERCER BLOQUE – MUSCULACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Estocada en step</td><td>3</td><td>8 c/l</td></tr>
+                                    <tr><td>Fondo en cajón</td><td>3</td><td>Máx.</td></tr>
+                                    <tr><td>Puente dinámico con rotación</td><td>3</td><td>18</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">CUARTO BLOQUE – MUSCULACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Abductores en multicadera (máquina)</td><td>3</td><td>6x6”</td></tr>
+                                    <tr><td>Curl con mancuernas</td><td>3</td><td>10</td></tr>
+                                    <tr><td>Sentadilla sumo</td><td>3</td><td>8</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </details>
+
+        <!-- DÍA 2: AERÓBICO -->
+        <details>
+            <summary>DÍA 2: AERÓBICO</summary>
+            <div class="details-content">
+                <section class="card !shadow-none !mb-0 !p-0">
+                    <h4 class="block-title">PRIMER BLOQUE – MOVILIDAD ARTICULAR Y ACTIVACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>MOVILIDAD: cadera, rodilla, tobillo, hombro y espalda</td><td>1</td><td>10 c/u</td><td>1</td><td>10 c/u</td></tr>
+                                <tr><td>Pull apart con banda</td><td>2</td><td>10</td><td>2</td><td>10</td></tr>
+                                <tr><td>Caminata de monstruo con banda</td><td>2</td><td>16</td><td>2</td><td>16</td></tr>
+                                <tr><td>Hollow</td><td>2</td><td>15” c/l</td><td>2</td><td>15” c/l</td></tr>
+                                <tr><td>Caminata de granjero</td><td>2</td><td>20</td><td>2</td><td>20 *</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">SEGUNDO BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Peso muerto con barra</td><td>3</td><td>8</td><td>4</td><td>8</td></tr>
+                                <tr><td>Hip thrust</td><td>3</td><td>6</td><td>4</td><td>6</td></tr>
+                                <tr><td>Clamshell</td><td>3</td><td>10 c/l</td><td>4</td><td>10 c/l</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">TERCER BLOQUE – AERÓBICO</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Power clean unilateral + press</td><td>3</td><td>40”</td><td>3</td><td>50”</td></tr>
+                                <tr><td>Plancha con pasaje a puente</td><td>3</td><td>30”</td><td>3</td><td>45”</td></tr>
+                                <tr><td>Subir y bajar step de frente</td><td>3</td><td>45”</td><td>3</td><td>1´</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">CUARTO BLOQUE – AERÓBICO</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Sentadilla + lanzar pelota a la pared</td><td>3</td><td>30”</td><td>3</td><td>45”</td></tr>
+                                <tr><td>Remo</td><td>3</td><td>1´30”</td><td>3</td><td>2´</td></tr>
+                                <tr><td>Saltar la soga</td><td>3</td><td>40”</td><td>3</td><td>1´</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">QUINTO BLOQUE – AERÓBICO</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Swing con ktb</td><td>3</td><td>30”</td><td>3</td><td>45”</td></tr>
+                                <tr><td>Burpees (cuerpo a tierra + sentadilla con salto)</td><td>3</td><td>40”</td><td>3</td><td>1´</td></tr>
+                                <tr><td>Mountains climbers</td><td>3</td><td>30”</td><td>3</td><td>45”</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="text-gray-700 mt-4 text-lg"><strong>PAUSA ENTRE BLOQUE:</strong> 2min. máximo</p>
+                    <p class="text-gray-700 text-lg">*agregar carga / progresión</p>
+
+                    <div class="variant-section">
+                        <h4 class="variant-title">Variante al día aeróbico</h4>
+                        <p class="text-gray-700 text-lg">En caso de llegar tarde o disponer menos de una hora:</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-700 text-lg">
+                            <li>Opción 1: incluye del primer al quinto bloque (tiempo estimado: 45min.)</li>
+                            <li>Opción 2: incluye del primer al cuarto bloque (tiempo estimado: 35min.)</li>
+                        </ul>
+                        <h5 class="block-title !text-lg">PRIMER BLOQUE - MOVILIDAD ARTICULAR Y ACTIVACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>MOVILIDAD: cadera, rodilla, tobillo, hombro y espalda</td><td>1</td><td>10 c/u</td></tr>
+                                    <tr><td>Pull apart con banda</td><td>2</td><td>10</td></tr>
+                                    <tr><td>Caminata de monstruo con banda</td><td>2</td><td>16</td></tr>
+                                    <tr><td>Hollow</td><td>2</td><td>15” c/l</td></tr>
+                                    <tr><td>Caminata de granjero</td><td>2</td><td>20</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">SEGUNDO BLOQUE – AERÓBICO (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Power clean unilateral + press</td><td>3</td><td>40”</td></tr>
+                                    <tr><td>Plancha con pasaje a puente</td><td>3</td><td>30”</td></tr>
+                                    <tr><td>Subir y bajar step de frente</td><td>3</td><td>45”</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">TERCER BLOQUE – AERÓBICO (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Sentadilla + lanzar pelota a la pared</td><td>3</td><td>30”</td></tr>
+                                    <tr><td>Remo</td><td>3</td><td>1´30”</td></tr>
+                                    <tr><td>Saltar la soga</td><td>3</td><td>40”</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">CUARTO BLOQUE – AERÓBICO (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Swing con ktb</td><td>3</td><td>30”</td></tr>
+                                    <tr><td>Burpees (cuerpo a tierra + sentadilla con salto)</td><td>3</td><td>40”</td></tr>
+                                    <tr><td>Mountains climbers</td><td>3</td><td>30”</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">QUINTO BLOQUE – AERÓBICO (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Caminata en cinta con pendiente nivel 9</td><td>1</td><td>10´</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </details>
+
+        <!-- DÍA 3: MUSCULACIÓN LIBRE -->
+        <details>
+            <summary>DÍA 3: MUSCULACIÓN LIBRE</summary>
+            <div class="details-content">
+                <section class="card !shadow-none !mb-0 !p-0">
+                    <h4 class="block-title">PRIMER BLOQUE – MOVILIDAD ARTICULAR Y ACTIVACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>MOVILIDAD: cadera, rodilla, tobillo, hombro y espalda</td><td>1</td><td>10 c/u</td><td>1</td><td>10 c/u</td></tr>
+                                <tr><td>Bicho muerto</td><td>2</td><td>16</td><td>2</td><td>10 *</td></tr>
+                                <tr><td>Crunch clásico</td><td>2</td><td>16</td><td>2</td><td>16</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">SEGUNDO BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Sentadilla copa</td><td>3</td><td>8</td><td>4</td><td>8</td></tr>
+                                <tr><td>Press militar</td><td>3</td><td>6</td><td>4</td><td>8</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">TERCER BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Peso muerto</td><td>3</td><td>6</td><td>4</td><td>7</td></tr>
+                                <tr><td>Remo bajo cerrado</td><td>3</td><td>12</td><td>4</td><td>10</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">CUARTO BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Hip thrust</td><td>3</td><td>7</td><td>4</td><td>5</td></tr>
+                                <tr><td>Curl martillo con mancuerna</td><td>3</td><td>10</td><td>4</td><td>8</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">QUINTO BLOQUE – MUSCULACIÓN</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Aductor en máquina</td><td>3</td><td>5x6”</td><td>4</td><td>7</td></tr>
+                                <tr><td>Tríceps en polea</td><td>3</td><td>8</td><td>4</td><td>8</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4 class="block-title">SEXTO BLOQUE – AERÓBICO</h4>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ejercicio</th>
+                                    <th>Semana 1-2 (Sets)</th>
+                                    <th>Semana 1-2 (Reps)</th>
+                                    <th>Semana 3-4 (Sets)</th>
+                                    <th>Semana 3-4 (Reps)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Elíptico</td><td>1</td><td>10´</td><td>1</td><td>15´</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="variant-section">
+                        <h4 class="variant-title">Variante al día de musculación libre</h4>
+                        <p class="text-gray-700 text-lg">En caso de llegar tarde o disponer menos de una hora:</p>
+                        <ul class="list-disc list-inside mt-2 text-gray-700 text-lg">
+                            <li>Opción 1: incluye del primer al quinto bloque (tiempo estimado: 45min.)</li>
+                            <li>Opción 2: incluye del primer al cuarto bloque (tiempo estimado: 35min.)</li>
+                        </ul>
+                        <h5 class="block-title !text-lg">PRIMER BLOQUE - MOVILIDAD ARTICULAR Y ACTIVACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>MOVILIDAD: cadera, rodilla, tobillo, hombro y espalda</td><td>1</td><td>10 c/u</td></tr>
+                                    <tr><td>Bicho muerto</td><td>2</td><td>16</td></tr>
+                                    <tr><td>Crunch clásico</td><td>2</td><td>16</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">SEGUNDO BLOQUE – MUSCULACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Peso muerto</td><td>4</td><td>6</td></tr>
+                                    <tr><td>Remo bajo cerrado</td><td>4</td><td>12</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">TERCER BLOQUE – MUSCULACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Hip thrust</td><td>4</td><td>7</td></tr>
+                                    <tr><td>Curl martillo con mancuerna</td><td>4</td><td>10</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">CUARTO BLOQUE – MUSCULACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Glúteo en banco lumbar</td><td>3</td><td>7</td></tr>
+                                    <tr><td>Curl martillo con mancuerna</td><td>3</td><td>10</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h5 class="block-title !text-lg">QUINTO BLOQUE – MUSCULACIÓN (Variante)</h5>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr><th>Ejercicio</th><th>Sets</th><th>Reps</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Elíptico</td><td>1</td><td>10´</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </details>
+
+        <footer class="text-center text-gray-500 text-sm mt-8 pb-4">
+            &copy; 2024 Plan de Entrenamiento Luciana Lanzone. Todos los derechos reservados.
+        </footer>
+    </div>
+</body>
+</html>
+
